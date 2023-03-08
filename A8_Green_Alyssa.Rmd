@@ -1,5 +1,5 @@
 ---
-title: "Matabarcoding and Community Ecology"
+title: "Metabarcoding and Community Ecology"
 author: "Alyssa Green"
 date: "2023-03-08"
 output: html_document
@@ -70,14 +70,16 @@ dist=vegdist(FS_bin_loc, method="bray", binary = F)
 tree=nj(dist)
 ```
 
-## Plot Tree Figure out how to colour based on location
+## Plot Tree
 ```{r}
 ggtree(tree, layout = "rectangular") %<+% FS +
 geom_tiplab(aes(colour=Location)) + theme(legend.position = "right")
 ```
-Figure 1: Tree of different quadrates. i indicates that the quadrate patch is inside garlic mustard patches, and o indicates that the quadrate patch is outside the garlic mustard patches. This figure demonstrates that garlic mustard has a large effect on the plan community. We can see this because the quadrates coloured for i and o are in almost completely separate clades, with the exception of 13o3, 13o1, 13o2, 3i1, and 3i2.
+Figure 1: Tree of different quadrates. i indicates that the quadrate patch is inside garlic mustard patches, and o indicates that the quadrate patch is outside the garlic mustard patches. We can see this because the quadrates coloured for i and o are in almost entirely separate clades, except for 13o3, 13o1, 13o2, 3i1, and 3i2. Therefore, this figure demonstrates that garlic mustard has a large effect on the plant community. 
 
-Based on the results demonstrated in Figure 1, we can conclude that garlic mustard has a large effect on the plant community. This is because the quadrates coloured for i and o are in almost completely separate clades, with the exception of 13o3, 13o1, 13o2, 3i1, and 3i2. Due, to the small number of outlying quadrates, it is likely that they are located in their positions due to some other property, such as bolding or budding, which when not accounted for, would cause the outliers to move into there respective clades. This would further indicate that garlic mustard has a large effect on the plant community.
+## Analysis
+Based on the results seen in Figure 1, we can conclude that garlic mustard has a large effect on the plant community. This is because the quadrates coloured for i and o are in almost entirely separate clades, except for 13o3, 13o1, 13o2, 3i1, and 3i2. Due to the small number of outlying quadrates, they are likely located in their positions due to some other property, such as bolding or budding, which, when not accounted for, would likely cause the outliers to move into their respective clades. This finding would further indicate that garlic mustard has a large effect on the plant community.
+
 
 # Question 2
 
@@ -86,7 +88,7 @@ Based on the results demonstrated in Figure 1, we can conclude that garlic musta
 set.seed(13)
 NMDSdat=metaMDS(dist, k=2, trymax = 100)
 ```
-## Create data for plottin
+## Create data for plotting
 ```{r}
 row.names(FS)=FS$Quadrate
 row.names(FS)
@@ -105,8 +107,8 @@ PDat=merge(PDat, FS, by="Quadrate", all.x=T, all.y =F)
 PDat$Population=as.factor(PDat$Population)
 qplot(x=NMDS1, NMDS2, alpha=I(0.6), data = PDat, shape=Location, colour=Population)+theme_bw()
 ```
-Figure 2: NMDS Plot. i indicates that the quadrate patch is inside garlic mustard patches, and o indicates that the quadrate patch is outside the garlic mustard patches. This figure demonstrates the distinction of samples based on location and population. From this figure we can see that the locations are well clustered, divided across the 45 degree line. We can also see that the populations are not as well clustered with different colours located sporatically across the plot.
+Figure 2: NMDS Plot. i indicates that the quadrate patch is inside garlic mustard patches, and o indicates that the quadrate patch is outside the garlic mustard patches. This figure demonstrates the distinction of samples based on location and population and shows that the locations are well-clustered and divided across the 45-degree line. We can also see that the populations are not as well clustered, with different colours located sporadically across the plot.
 
-
-Based on the results demonstrated in Figure 2, we can conclude that the presence/absence of garlic mustard (location : in(i)/out(o)) has a stronger effect on plant communities than sampling population. This is seen because the presence/absence of garlic mustard is well clustered, divided across the 45 degree line, with a few deviants. Whereas, the populations are not clustered as well, with different colours located sporatically across the plot.
+## Analysis
+Based on the results seen in Figure 2, we can conclude that the presence/absence of garlic mustard (location: in(i)/out(o)) has a stronger effect on plant communities than the sampling population. This is seen because the presence/absence of garlic mustard is well clustered and divided across the 45-degree line, with a few deviants. In contrast, populations are not clustered as well, as different colours are located sporadically across the plot.
 
